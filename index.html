@@ -1,95 +1,198 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101722">
-  <title>Pirate Shop — Fan-Konzept</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pirate Shop Token</title>
   <style>
     :root {
-      color-scheme: dark;
-      --ink: #f7f0dd;
-      --muted: #c5baa0;
-      --gold: #f4c767;
-      --sea: #101722;
-      --panel: rgba(15, 23, 32, .82);
+      --gold-1: #fce38a;
+      --gold-2: #f4c95d;
+      --gold-3: #d89c1d;
+      --gold-4: #8a5a15;
+      --gold-5: #5c3407;
+      --ink: #22170a;
+      --white: #ffffff;
+      --soft: #f7f1dd;
+      --shadow: rgba(47, 25, 0, 0.35);
     }
+
     * { box-sizing: border-box; }
-    body {
+
+    html, body {
       margin: 0;
+      height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, var(--gold-2) 0%, var(--gold-3) 30%, var(--gold-4) 100%);
+      color: var(--ink);
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .screen {
+      width: 100%;
       min-height: 100vh;
       display: grid;
       place-items: center;
-      padding: 32px 18px;
-      color: var(--ink);
-      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      position: relative;
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+
+    .screen.hidden {
+      opacity: 0;
+      transform: scale(0.98);
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+    }
+
+    .start-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      background:
-        radial-gradient(ellipse at 50% 15%, rgba(201, 133, 49, .24), transparent 38%),
-        linear-gradient(160deg, #101722, #172b35 58%, #0b121a);
+      gap: 20px;
+      padding: 24px;
     }
-    main { width: min(100%, 680px); }
-    .card {
-      padding: clamp(28px, 7vw, 58px);
-      border: 1px solid rgba(244, 199, 103, .32);
-      border-radius: 28px;
-      background: var(--panel);
-      box-shadow: 0 24px 80px rgba(0,0,0,.4);
-      backdrop-filter: blur(8px);
-    }
-    .coin {
-      width: clamp(150px, 42vw, 250px);
+
+    .token {
+      width: min(62vw, 300px);
       aspect-ratio: 1;
-      margin: 0 auto 30px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 25%, #fff6c5 0%, var(--gold-1) 18%, var(--gold-2) 30%, var(--gold-3) 56%, var(--gold-4) 100%);
+      border: 10px double rgba(78, 45, 0, 0.65);
+      box-shadow:
+        inset 0 0 0 10px rgba(255,255,255,0.18),
+        0 22px 55px var(--shadow),
+        0 0 0 8px rgba(255, 235, 162, 0.26);
+      position: relative;
       display: grid;
       place-items: center;
+      animation: float 3.4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .token::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
       border-radius: 50%;
-      border: 8px double #85571f;
-      outline: 3px solid rgba(255, 224, 145, .5);
-      background: radial-gradient(circle at 32% 26%, #fff0b0, #e8ad43 38%, #a46720 78%, #633b17);
-      box-shadow: inset 0 0 0 9px rgba(255,239,180,.32), 0 18px 45px rgba(0,0,0,.4);
+      border: 4px solid rgba(89, 53, 10, 0.18);
     }
-    .coin svg { width: 58%; height: 58%; filter: drop-shadow(0 3px 2px rgba(54,32,8,.35)); }
-    .eyebrow {
-      margin: 0 0 10px;
-      color: var(--gold);
-      font-size: .78rem;
-      font-weight: 800;
-      letter-spacing: .2em;
+
+    .token::after {
+      content: "";
+      position: absolute;
+      inset: 34px;
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,0.22);
+    }
+
+    .token-svg {
+      width: 58%;
+      height: 58%;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 3px 2px rgba(22, 8, 0, 0.22));
+    }
+
+    .title {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 900;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
+      color: #3d2408;
+      text-shadow: 0 2px 0 rgba(255,255,255,0.18);
     }
-    h1 { margin: 0; font-size: clamp(2rem, 7vw, 3.8rem); line-height: 1.05; }
-    .intro { max-width: 470px; margin: 18px auto 0; color: var(--muted); line-height: 1.7; }
-    .notice {
-      margin: 28px 0 0;
-      padding: 14px 16px;
-      border-radius: 12px;
-      border: 1px solid rgba(244,199,103,.25);
-      color: #e9ddc3;
-      background: rgba(244,199,103,.08);
-      font-size: .9rem;
-      line-height: 1.55;
+
+    .button {
+      border: none;
+      background: linear-gradient(180deg, #fff3c3 0%, #f0c85a 100%);
+      color: var(--ink);
+      font-size: clamp(1rem, 2.5vw, 1.6rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 18px 36px;
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow: 0 12px 22px rgba(76, 45, 0, 0.22);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
-    footer { margin-top: 20px; color: #aaa18e; font-size: .78rem; }
+
+    .button:hover {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 16px 26px rgba(76, 45, 0, 0.28);
+    }
+
+    .button:active {
+      transform: translateY(1px) scale(0.99);
+    }
+
+    .white-screen {
+      position: absolute;
+      inset: 0;
+      display: none;
+      place-items: center;
+      background: white;
+      color: black;
+      text-align: center;
+      padding: 24px;
+    }
+
+    .white-screen.show {
+      display: grid;
+    }
+
+    .white-screen h2 {
+      margin: 0;
+      font-size: clamp(2.5rem, 8vw, 7rem);
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+    }
   </style>
 </head>
 <body>
-  <main>
-    <section class="card" aria-labelledby="title">
-      <div class="coin" role="img" aria-label="Goldene Fantasie-Piratenmünze mit Kompassrose">
-        <svg viewBox="0 0 100 100" aria-hidden="true">
-          <circle cx="50" cy="50" r="43" fill="none" stroke="#704719" stroke-width="2" opacity=".8"/>
-          <path d="M50 10 58 42 90 50 58 58 50 90 42 58 10 50 42 42Z" fill="#704719"/>
-          <path d="M50 20 55 45 80 50 55 55 50 80 45 55 20 50 45 45Z" fill="#fff0b0"/>
-          <circle cx="50" cy="50" r="7" fill="#704719"/>
+  <div class="screen" id="goldScreen">
+    <div class="start-wrap">
+      <div class="token" aria-label="Pirate Shop Token" role="img">
+        <svg class="token-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="50" cy="50" r="43" fill="none" stroke="#6a430d" stroke-width="2" opacity="0.8"/>
+          <path d="M50 10 58 42 90 50 58 58 50 90 42 58 10 50 42 42Z" fill="#6a430d" opacity="0.9"/>
+          <path d="M50 20 55 45 80 50 55 55 50 80 45 55 20 50 45 45Z" fill="#fff7d1"/>
+          <circle cx="50" cy="50" r="7" fill="#6a430d"/>
         </svg>
       </div>
-      <p class="eyebrow">Ein Piraten-Fankonzept</p>
-      <h1 id="title">Pirate Shop</h1>
-      <p class="intro">Eine kleine, von Piraten und Schatzkarten inspirierte Fan-Seite – mit einer eigens gestalteten Kompassmünze.</p>
-      <p class="notice"><strong>Fan-Projekt:</strong> Diese Website ist nicht offiziell und steht in keiner Verbindung zu Epic Games oder Fortnite. Sie bietet keine Spielwährung, Tokens oder kostenlosen Gegenstände an. Gib hier niemals dein Passwort oder deine Kontodaten ein.</p>
-    </section>
-    <footer>Inoffizielles Fan-Konzept · Keine Verbindung zu Epic Games</footer>
-  </main>
+
+      <h1 class="title">Pirate Shop</h1>
+      <button class="button" id="startBtn">Starten</button>
+    </div>
+  </div>
+
+  <div class="white-screen" id="whiteScreen" aria-live="polite">
+    <h2>LECK MEINE EIER</h2>
+  </div>
+
+  <script>
+    const startBtn = document.getElementById('startBtn');
+    const goldScreen = document.getElementById('goldScreen');
+    const whiteScreen = document.getElementById('whiteScreen');
+
+    startBtn.addEventListener('click', () => {
+      goldScreen.classList.add('hidden');
+      whiteScreen.classList.add('show');
+    });
+  </script>
 </body>
 </html>
