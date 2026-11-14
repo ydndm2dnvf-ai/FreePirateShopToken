@@ -3,23 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>freefntoken.com</title>
+  <meta name="theme-color" content="#101722">
+  <title>Pirate Shop — Fan-Konzept</title>
   <style>
-    body {
-      background: white;
-      color: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      font-family: Arial, sans-serif;
-      text-align: center;
+    :root {
+      color-scheme: dark;
+      --ink: #f7f0dd;
+      --muted: #c5baa0;
+      --gold: #f4c767;
+      --sea: #101722;
+      --panel: rgba(15, 23, 32, .82);
     }
-    h1 { font-size: 45px; font-weight: 900; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 32px 18px;
+      color: var(--ink);
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      text-align: center;
+      background:
+        radial-gradient(ellipse at 50% 15%, rgba(201, 133, 49, .24), transparent 38%),
+        linear-gradient(160deg, #101722, #172b35 58%, #0b121a);
+    }
+    main { width: min(100%, 680px); }
+    .card {
+      padding: clamp(28px, 7vw, 58px);
+      border: 1px solid rgba(244, 199, 103, .32);
+      border-radius: 28px;
+      background: var(--panel);
+      box-shadow: 0 24px 80px rgba(0,0,0,.4);
+      backdrop-filter: blur(8px);
+    }
+    .coin {
+      width: clamp(150px, 42vw, 250px);
+      aspect-ratio: 1;
+      margin: 0 auto 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      border: 8px double #85571f;
+      outline: 3px solid rgba(255, 224, 145, .5);
+      background: radial-gradient(circle at 32% 26%, #fff0b0, #e8ad43 38%, #a46720 78%, #633b17);
+      box-shadow: inset 0 0 0 9px rgba(255,239,180,.32), 0 18px 45px rgba(0,0,0,.4);
+    }
+    .coin svg { width: 58%; height: 58%; filter: drop-shadow(0 3px 2px rgba(54,32,8,.35)); }
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--gold);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+    h1 { margin: 0; font-size: clamp(2rem, 7vw, 3.8rem); line-height: 1.05; }
+    .intro { max-width: 470px; margin: 18px auto 0; color: var(--muted); line-height: 1.7; }
+    .notice {
+      margin: 28px 0 0;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(244,199,103,.25);
+      color: #e9ddc3;
+      background: rgba(244,199,103,.08);
+      font-size: .9rem;
+      line-height: 1.55;
+    }
+    footer { margin-top: 20px; color: #aaa18e; font-size: .78rem; }
   </style>
 </head>
 <body>
-  <h1>LECK MEINE EIER</h1>
+  <main>
+    <section class="card" aria-labelledby="title">
+      <div class="coin" role="img" aria-label="Goldene Fantasie-Piratenmünze mit Kompassrose">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <circle cx="50" cy="50" r="43" fill="none" stroke="#704719" stroke-width="2" opacity=".8"/>
+          <path d="M50 10 58 42 90 50 58 58 50 90 42 58 10 50 42 42Z" fill="#704719"/>
+          <path d="M50 20 55 45 80 50 55 55 50 80 45 55 20 50 45 45Z" fill="#fff0b0"/>
+          <circle cx="50" cy="50" r="7" fill="#704719"/>
+        </svg>
+      </div>
+      <p class="eyebrow">Ein Piraten-Fankonzept</p>
+      <h1 id="title">Pirate Shop</h1>
+      <p class="intro">Eine kleine, von Piraten und Schatzkarten inspirierte Fan-Seite – mit einer eigens gestalteten Kompassmünze.</p>
+      <p class="notice"><strong>Fan-Projekt:</strong> Diese Website ist nicht offiziell und steht in keiner Verbindung zu Epic Games oder Fortnite. Sie bietet keine Spielwährung, Tokens oder kostenlosen Gegenstände an. Gib hier niemals dein Passwort oder deine Kontodaten ein.</p>
+    </section>
+    <footer>Inoffizielles Fan-Konzept · Keine Verbindung zu Epic Games</footer>
+  </main>
 </body>
 </html>
